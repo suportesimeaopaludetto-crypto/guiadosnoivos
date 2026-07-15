@@ -1,0 +1,17 @@
+{
+  "name": "guia-dos-noivos",
+  "version": 2,
+  "public": false,
+  "buildCommand": "echo 'Static site'",
+  "outputDirectory": "./",
+  "routes": [
+    {
+      "src": "^/$",
+      "dest": "/pagina-de-vendas-com-pixel.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/pagina-de-vendas-com-pixel.html"
+    }
+  ]
+}
