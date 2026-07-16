@@ -367,20 +367,23 @@ src="https://www.facebook.com/tr?id=956577717394788&ev=PageView&noscript=1"
 
 <script>
 // Track ViewContent when user scrolls to pricing section
-window.addEventListener('scroll', function() {
-  const pricingSection = document.querySelector('.offer');
+var vcSent = false;
+function checarViewContent() {
+  if (vcSent) return;
+  var pricingSection = document.querySelector('.offer');
   if (pricingSection) {
-    const rect = pricingSection.getBoundingClientRect();
+    var rect = pricingSection.getBoundingClientRect();
     if (rect.top < window.innerHeight && window.fbq) {
+      vcSent = true;
       fbq('track', 'ViewContent', {
         content_name: 'Casamento Sem Caos',
         content_category: 'Wedding Planning Guide'
       });
-      // Remove listener to prevent duplicate tracking
-      window.removeEventListener('scroll', arguments.callee);
+      window.removeEventListener('scroll', checarViewContent);
     }
   }
-}, { once: true });
+}
+window.addEventListener('scroll', checarViewContent);
 
 // Track checkout button clicks
 function rastrearCheckout(preco) {
